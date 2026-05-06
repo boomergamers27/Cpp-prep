@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C++ Programming – 13 Mark Answers | Anna University</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1209;
+    --paper: #fdf8f0;
+    --cream: #f5ede0;
+    --accent: #8b1a1a;
+    --gold: #c49a2b;
+    --light-rule: #e8ddd0;
+    --code-bg: #1e1610;
+    --code-text: #e8d5b0;
+    --highlight: #fff3cd;
+    --unit-stripe: #8b1a1a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--accent);
+    color: #fff;
+    padding: 2.5rem 0 2rem;
+    text-align: center;
+    border-bottom: 6px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,.04) 20px,
+      rgba(255,255,255,.04) 40px
+    );
+  }
+  .site-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 900;
+    letter-spacing: .04em;
+    text-shadow: 2px 2px 0 rgba(0,0,0,.3);
+    position: relative;
+  }
+  .site-header .subtitle {
+    margin-top: .5rem;
+    font-size: .95rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    opacity: .85;
+    font-family: 'Source Serif 4', serif;
+    font-weight: 300;
+    position: relative;
+  }
+  .badge-row {
+    display: flex; gap: 1rem; justify-content: center;
+    margin-top: 1.2rem; flex-wrap: wrap; position: relative;
+  }
+  .badge {
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 4px;
+    padding: .25rem .9rem;
+    font-size: .78rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  /* ── NAV ── */
+  .toc {
+    background: var(--cream);
+    border-bottom: 2px solid var(--light-rule);
+    padding: 1.5rem 2rem;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,.08);
+  }
+  .toc-title {
+    font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: .6rem;
+  }
+  .toc-links {
+    display: flex; gap: .6rem; flex-wrap: wrap;
+  }
+  .toc-links a {
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid var(--light-rule);
+    border-radius: 3px;
+    padding: .3rem .8rem;
+    font-size: .8rem;
+    color: var(--ink);
+    transition: all .2s;
+    font-family: 'Source Serif 4', serif;
+  }
+  .toc-links a:hover {
+    background: var(--accent); color: #fff; border-color: var(--accent);
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  /* ── UNIT HEADER ── */
+  .unit-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 3.5rem 0 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid var(--accent);
+  }
+  .unit-number {
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    width: 64px; height: 64px;
+    display: grid; place-items: center;
+    border-radius: 4px;
+    flex-shrink: 0;
+    box-shadow: 4px 4px 0 var(--gold);
+  }
+  .unit-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .unit-desc {
+    font-size: .85rem;
+    color: #666;
+    margin-top: .2rem;
+  }
+
+  /* ── QUESTION CARD ── */
+  .q-card {
+    background: #fff;
+    border: 1px solid var(--light-rule);
+    border-left: 5px solid var(--gold);
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 2.5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+    animation: fadeUp .4s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(16px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .q-head {
+    background: var(--cream);
+    border-bottom: 1px solid var(--light-rule);
+    padding: 1rem 1.5rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+  }
+  .q-num {
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: .85rem;
+    padding: .15rem .6rem;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: .1rem;
+  }
+  .q-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .marks-tag {
+    margin-left: auto;
+    background: var(--gold);
+    color: #fff;
+    font-size: .75rem;
+    font-weight: 600;
+    padding: .2rem .7rem;
+    border-radius: 20px;
+    flex-shrink: 0;
+    font-family: 'Source Serif 4', serif;
+    letter-spacing: .05em;
+  }
+  .q-body {
+    padding: 1.5rem 1.8rem;
+  }
+
+  /* ── ANSWER CONTENT ── */
+  .definition-box {
+    background: var(--highlight);
+    border-left: 4px solid var(--gold);
+    padding: .8rem 1.2rem;
+    margin: .8rem 0 1.2rem;
+    border-radius: 0 4px 4px 0;
+    font-style: italic;
+  }
+
+  h3.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 1.4rem 0 .5rem;
+    display: flex; align-items: center; gap: .5rem;
+  }
+  h3.section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--light-rule);
+  }
+
+  .point-list {
+    list-style: none;
+    padding: 0;
+    margin: .5rem 0 1rem;
+  }
+  .point-list li {
+    padding: .35rem 0 .35rem 1.6rem;
+    position: relative;
+    border-bottom: 1px dashed var(--light-rule);
+  }
+  .point-list li:last-child { border-bottom: none; }
+  .point-list li::before {
+    content: '▶';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: .65rem;
+    top: .55rem;
+  }
+
+  /* ── CODE ── */
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .8rem;
+    line-height: 1.7;
+    padding: 1.2rem 1.5rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1rem 0;
+    border: 1px solid rgba(255,255,255,.07);
+    position: relative;
+  }
+  pre::before {
+    content: 'C++';
+    position: absolute; top: .5rem; right: .8rem;
+    font-size: .65rem; color: rgba(255,255,255,.3);
+    letter-spacing: .1em;
+  }
+  .kw { color: #e06c75; }
+  .cm { color: #6a9955; font-style: italic; }
+  .st { color: #98c379; }
+  .nm { color: #61afef; }
+  .tp { color: #e5c07b; }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: .88rem;
+  }
+  th {
+    background: var(--accent);
+    color: #fff;
+    padding: .6rem 1rem;
+    text-align: left;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+  }
+  td {
+    padding: .55rem 1rem;
+    border-bottom: 1px solid var(--light-rule);
+  }
+  tr:nth-child(even) td { background: var(--cream); }
+
+  /* ── DIAGRAM ── */
+  .diagram {
+    background: var(--cream);
+    border: 1px dashed var(--gold);
+    border-radius: 6px;
+    padding: 1rem 1.5rem;
+    margin: 1rem 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .78rem;
+    line-height: 1.8;
+    color: var(--accent);
+  }
+
+  .note-box {
+    background: #e8f4f8;
+    border-left: 4px solid #2196f3;
+    padding: .7rem 1.1rem;
+    margin: 1rem 0;
+    border-radius: 0 4px 4px 0;
+    font-size: .88rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--cream);
+    border-top: 2px solid var(--light-rule);
+    color: #888;
+    font-size: .8rem;
+    letter-spacing: .05em;
+  }
+
+  @media(max-width:600px){
+    .site-header h1 { font-size: 1.6rem; }
+    .unit-title { font-size: 1.2rem; }
+    .container { padding: 1.5rem 1rem; }
+    .toc { padding: 1rem; }
+  }
+  @media print {
+    .toc { position: static; }
+    .q-card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <h1>C++ Programming — 13 Mark Answers</h1>
+  <p class="subtitle">Anna University Examination Reference | Units I – IV</p>
+  <div class="badge-row">
+    <span class="badge">Unit 1 · Basics</span>
+    <span class="badge">Unit 2 · OOP</span>
+    <span class="badge">Unit 3 · Inheritance</span>
+    <span class="badge">Unit 4 · Advanced</span>
+    <span class="badge">13 Marks Each</span>
+  </div>
+</header>
+
+<!-- STICKY NAV -->
+<nav class="toc">
+  <div class="toc-title">Jump to Unit</div>
+  <div class="toc-links">
+    <a href="#unit1">Unit 1 – Basics</a>
+    <a href="#unit2">Unit 2 – OOP</a>
+    <a href="#unit3">Unit 3 – Inheritance</a>
+    <a href="#unit4">Unit 4 – Templates &amp; Exceptions</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- ═══════════════════════════════ UNIT 1 ═══════════════════════════════ -->
+<div class="unit-header" id="unit1">
+  <div class="unit-number">1</div>
+  <div>
+    <div class="unit-title">Basics of C++ Programming</div>
+    <div class="unit-desc">Structure · Operators · Control Structure · Function Overloading</div>
+  </div>
+</div>
+
+<!-- Q1.1 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 1.1</span>
+    <span class="q-text">Explain the Structure of a C++ Program with a suitable example.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      C++ is an object-oriented programming language developed by Bjarne Stroustrup as an extension of C. A C++ program is organized into several logical sections that work together to produce output.
+    </div>
+
+    <h3 class="section-title">1. Basic Structure of a C++ Program</h3>
+    <p>Every C++ program consists of the following sections:</p>
+    <ul class="point-list">
+      <li><strong>Documentation Section:</strong> Contains comments (// or /* */) describing the program purpose, author, and date.</li>
+      <li><strong>Preprocessor Directives:</strong> Lines beginning with # that instruct the preprocessor (e.g., <code>#include &lt;iostream&gt;</code>).</li>
+      <li><strong>Namespace Declaration:</strong> <code>using namespace std;</code> allows use of standard library functions without the std:: prefix.</li>
+      <li><strong>Global Declarations:</strong> Variables, constants, or function prototypes declared outside all functions; accessible throughout the program.</li>
+      <li><strong>Class Declaration:</strong> Blueprint for creating objects (used in OOP).</li>
+      <li><strong>Function Definitions:</strong> Blocks of code that perform specific tasks.</li>
+      <li><strong>main() Function:</strong> The entry point of every C++ program; execution begins here.</li>
+    </ul>
+
+    <h3 class="section-title">2. Detailed Explanation of Each Section</h3>
+    <ul class="point-list">
+      <li><strong>Header Files (#include):</strong> Provide declarations for built-in functions. <code>&lt;iostream&gt;</code> provides cin/cout; <code>&lt;cmath&gt;</code> provides math functions.</li>
+      <li><strong>main() Return Type:</strong> Returns int to the OS (0 = success, non-zero = error).</li>
+      <li><strong>Statements &amp; Expressions:</strong> Instructions ending with semicolon (;) that the computer executes sequentially.</li>
+      <li><strong>Return Statement:</strong> <code>return 0;</code> signals successful completion.</li>
+    </ul>
+
+    <h3 class="section-title">3. Example Program</h3>
+<pre><span class="cm">// Documentation Section</span>
+<span class="cm">// Program: Simple C++ Structure Demo</span>
+<span class="cm">// Author: Student | Date: 2024</span>
+
+<span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>   <span class="cm">// Preprocessor Directive</span>
+<span class="kw">#include</span> <span class="st">&lt;string&gt;</span>
+
+<span class="kw">using namespace</span> <span class="tp">std</span>;   <span class="cm">// Namespace Declaration</span>
+
+<span class="kw">int</span> marks = <span class="nm">0</span>;         <span class="cm">// Global Declaration</span>
+
+<span class="cm">// Function Prototype</span>
+<span class="kw">void</span> <span class="nm">displayInfo</span>(<span class="kw">string</span> name, <span class="kw">int</span> age);
+
+<span class="cm">// Class Declaration</span>
+<span class="kw">class</span> <span class="tp">Student</span> {
+<span class="kw">public</span>:
+    <span class="kw">string</span> name;
+    <span class="kw">int</span> roll;
+    <span class="kw">void</span> <span class="nm">display</span>() {
+        cout &lt;&lt; <span class="st">"Roll: "</span> &lt;&lt; roll &lt;&lt; <span class="st">" Name: "</span> &lt;&lt; name &lt;&lt; endl;
+    }
+};
+
+<span class="cm">// Function Definition</span>
+<span class="kw">void</span> <span class="nm">displayInfo</span>(<span class="kw">string</span> name, <span class="kw">int</span> age) {
+    cout &lt;&lt; <span class="st">"Name: "</span> &lt;&lt; name &lt;&lt; <span class="st">" Age: "</span> &lt;&lt; age &lt;&lt; endl;
+}
+
+<span class="cm">// main() Function – Entry Point</span>
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="tp">Student</span> s1;
+    s1.roll = <span class="nm">101</span>;
+    s1.name = <span class="st">"Raj"</span>;
+    s1.<span class="nm">display</span>();
+    <span class="nm">displayInfo</span>(<span class="st">"Priya"</span>, <span class="nm">20</span>);
+    cout &lt;&lt; <span class="st">"Program executed successfully"</span> &lt;&lt; endl;
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">4. Output</h3>
+    <div class="diagram">Roll: 101  Name: Raj<br>Name: Priya  Age: 20<br>Program executed successfully</div>
+
+    <h3 class="section-title">5. Key Points</h3>
+    <ul class="point-list">
+      <li>Every C++ program must have exactly one <strong>main()</strong> function.</li>
+      <li>Statements end with a semicolon (<strong>;</strong>).</li>
+      <li>C++ is case-sensitive: <code>Main</code> ≠ <code>main</code>.</li>
+      <li>Curly braces <code>{ }</code> define the body of functions and classes.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q1.2 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 1.2</span>
+    <span class="q-text">Explain Operators and Expressions in C++ with examples.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      An <em>operator</em> is a symbol that performs an operation on operands. An <em>expression</em> is a combination of operators and operands that evaluates to a value.
+    </div>
+
+    <h3 class="section-title">1. Types of Operators in C++</h3>
+    <table>
+      <tr><th>Type</th><th>Operators</th><th>Example</th><th>Result</th></tr>
+      <tr><td>Arithmetic</td><td>+ – * / %</td><td>10 % 3</td><td>1</td></tr>
+      <tr><td>Relational</td><td>== != &gt; &lt; &gt;= &lt;=</td><td>5 &gt; 3</td><td>true (1)</td></tr>
+      <tr><td>Logical</td><td>&amp;&amp; || !</td><td>!(5&gt;3)</td><td>false (0)</td></tr>
+      <tr><td>Bitwise</td><td>&amp; | ^ ~ &lt;&lt; &gt;&gt;</td><td>5 &amp; 3</td><td>1</td></tr>
+      <tr><td>Assignment</td><td>= += –= *= /= %=</td><td>a += 5</td><td>a = a+5</td></tr>
+      <tr><td>Increment/Decrement</td><td>++ ––</td><td>a++</td><td>a = a+1</td></tr>
+      <tr><td>Conditional (Ternary)</td><td>? :</td><td>a&gt;b ? a : b</td><td>max value</td></tr>
+      <tr><td>sizeof</td><td>sizeof()</td><td>sizeof(int)</td><td>4</td></tr>
+      <tr><td>Scope Resolution</td><td>::</td><td>std::cout</td><td>accesses namespace</td></tr>
+    </table>
+
+    <h3 class="section-title">2. Operator Precedence (High → Low)</h3>
+    <ul class="point-list">
+      <li>Unary: <code>++ -- ! ~ (type) sizeof</code></li>
+      <li>Multiplicative: <code>* / %</code></li>
+      <li>Additive: <code>+ –</code></li>
+      <li>Shift: <code>&lt;&lt; &gt;&gt;</code></li>
+      <li>Relational: <code>&lt; &gt; &lt;= &gt;=</code></li>
+      <li>Equality: <code>== !=</code></li>
+      <li>Bitwise AND, XOR, OR → Logical AND, OR → Ternary → Assignment</li>
+    </ul>
+
+    <h3 class="section-title">3. Example Program</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="kw">int</span> a = <span class="nm">10</span>, b = <span class="nm">3</span>;
+    cout &lt;&lt; <span class="st">"Arithmetic: "</span> &lt;&lt; a + b &lt;&lt; <span class="st">", "</span> &lt;&lt; a % b &lt;&lt; endl;
+    cout &lt;&lt; <span class="st">"Relational: "</span> &lt;&lt; (a &gt; b) &lt;&lt; endl;
+    cout &lt;&lt; <span class="st">"Logical: "</span>    &lt;&lt; (a &gt; 5 &amp;&amp; b &lt; 5) &lt;&lt; endl;
+    cout &lt;&lt; <span class="st">"Ternary Max: "</span> &lt;&lt; (a &gt; b ? a : b) &lt;&lt; endl;
+    cout &lt;&lt; <span class="st">"Bitwise AND: "</span> &lt;&lt; (a &amp; b) &lt;&lt; endl;
+    a += <span class="nm">5</span>;
+    cout &lt;&lt; <span class="st">"After a+=5: a = "</span> &lt;&lt; a &lt;&lt; endl;
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">4. Special C++ Operators</h3>
+    <ul class="point-list">
+      <li><strong>Scope Resolution (::):</strong> Accesses global variables or class members. E.g., <code>ClassName::member</code></li>
+      <li><strong>new / delete:</strong> Dynamic memory allocation/deallocation. E.g., <code>int *p = new int;</code></li>
+      <li><strong>Arrow (→):</strong> Accesses members through pointer. E.g., <code>ptr-&gt;name</code></li>
+      <li><strong>Dot (.):</strong> Accesses members via object. E.g., <code>obj.name</code></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q1.3 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 1.3</span>
+    <span class="q-text">Explain Control Structures in C++ with examples (if, if-else, switch, loops).</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      Control structures determine the flow of execution in a program. C++ supports three categories: Sequential, Selection (Branching), and Iteration (Looping).
+    </div>
+
+    <h3 class="section-title">1. Selection Statements</h3>
+    <p><strong>a) if statement:</strong></p>
+<pre><span class="kw">if</span> (condition) {
+    <span class="cm">// executes when condition is true</span>
+}</pre>
+    <p><strong>b) if-else statement:</strong></p>
+<pre><span class="kw">if</span> (marks &gt;= <span class="nm">50</span>)
+    cout &lt;&lt; <span class="st">"Pass"</span>;
+<span class="kw">else</span>
+    cout &lt;&lt; <span class="st">"Fail"</span>;</pre>
+    <p><strong>c) if-else if ladder:</strong></p>
+<pre><span class="kw">if</span> (marks &gt;= <span class="nm">90</span>)       cout &lt;&lt; <span class="st">"Grade A"</span>;
+<span class="kw">else if</span> (marks &gt;= <span class="nm">75</span>) cout &lt;&lt; <span class="st">"Grade B"</span>;
+<span class="kw">else if</span> (marks &gt;= <span class="nm">60</span>) cout &lt;&lt; <span class="st">"Grade C"</span>;
+<span class="kw">else</span>                  cout &lt;&lt; <span class="st">"Grade D"</span>;</pre>
+    <p><strong>d) switch statement:</strong></p>
+<pre><span class="kw">switch</span> (day) {
+    <span class="kw">case</span> <span class="nm">1</span>: cout &lt;&lt; <span class="st">"Monday"</span>;  <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="nm">2</span>: cout &lt;&lt; <span class="st">"Tuesday"</span>; <span class="kw">break</span>;
+    <span class="kw">default</span>: cout &lt;&lt; <span class="st">"Other"</span>;
+}</pre>
+
+    <h3 class="section-title">2. Iteration Statements (Loops)</h3>
+    <table>
+      <tr><th>Loop</th><th>Syntax</th><th>Use When</th></tr>
+      <tr><td>for</td><td>for(init; cond; update)</td><td>Count known</td></tr>
+      <tr><td>while</td><td>while(condition)</td><td>Count unknown</td></tr>
+      <tr><td>do-while</td><td>do{...}while(cond);</td><td>Execute at least once</td></tr>
+    </table>
+
+<pre><span class="cm">// for loop – print 1 to 5</span>
+<span class="kw">for</span>(<span class="kw">int</span> i = <span class="nm">1</span>; i &lt;= <span class="nm">5</span>; i++)
+    cout &lt;&lt; i &lt;&lt; <span class="st">" "</span>;
+
+<span class="cm">// while loop – sum of digits</span>
+<span class="kw">int</span> n = <span class="nm">153</span>, sum = <span class="nm">0</span>;
+<span class="kw">while</span>(n &gt; <span class="nm">0</span>) {
+    sum += n % <span class="nm">10</span>;
+    n /= <span class="nm">10</span>;
+}
+
+<span class="cm">// do-while – menu driven</span>
+<span class="kw">int</span> ch;
+<span class="kw">do</span> {
+    cout &lt;&lt; <span class="st">"1.Add 2.Delete 3.Exit: "</span>;
+    cin &gt;&gt; ch;
+} <span class="kw">while</span>(ch != <span class="nm">3</span>);</pre>
+
+    <h3 class="section-title">3. Jump Statements</h3>
+    <ul class="point-list">
+      <li><strong>break:</strong> Exits the innermost loop or switch immediately.</li>
+      <li><strong>continue:</strong> Skips the rest of current iteration; goes to next iteration.</li>
+      <li><strong>goto:</strong> Transfers control to a labeled statement (not recommended).</li>
+      <li><strong>return:</strong> Exits from the current function and optionally returns a value.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q1.4 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 1.4</span>
+    <span class="q-text">Explain Function Overloading in C++ with a complete example.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      <em>Function Overloading</em> is the ability to define multiple functions with the <strong>same name</strong> but different <strong>parameter lists</strong> (different number, type, or order of parameters). The compiler distinguishes them at compile time — a form of <em>compile-time (static) polymorphism</em>.
+    </div>
+
+    <h3 class="section-title">1. Rules for Function Overloading</h3>
+    <ul class="point-list">
+      <li>Functions must differ in the <strong>number of parameters</strong>, or</li>
+      <li>Functions must differ in the <strong>type of parameters</strong>, or</li>
+      <li>Functions must differ in the <strong>order of parameters</strong>.</li>
+      <li>Return type alone <strong>cannot</strong> distinguish overloaded functions.</li>
+    </ul>
+
+    <h3 class="section-title">2. Complete Example</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+
+<span class="cm">// Overloaded add() functions</span>
+<span class="kw">int</span>    <span class="nm">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b)              { <span class="kw">return</span> a + b; }
+<span class="kw">double</span> <span class="nm">add</span>(<span class="kw">double</span> a, <span class="kw">double</span> b)        { <span class="kw">return</span> a + b; }
+<span class="kw">int</span>    <span class="nm">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b, <span class="kw">int</span> c)      { <span class="kw">return</span> a + b + c; }
+<span class="kw">string</span> <span class="nm">add</span>(<span class="kw">string</span> a, <span class="kw">string</span> b)       { <span class="kw">return</span> a + b; }
+
+<span class="kw">int</span> <span class="nm">main</span>() {
+    cout &lt;&lt; <span class="nm">add</span>(<span class="nm">5</span>, <span class="nm">3</span>)             &lt;&lt; endl; <span class="cm">// calls int version → 8</span>
+    cout &lt;&lt; <span class="nm">add</span>(<span class="nm">3.5</span>, <span class="nm">2.1</span>)         &lt;&lt; endl; <span class="cm">// calls double version → 5.6</span>
+    cout &lt;&lt; <span class="nm">add</span>(<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>)           &lt;&lt; endl; <span class="cm">// calls 3-param version → 6</span>
+    cout &lt;&lt; <span class="nm">add</span>(<span class="st">"Hello, "</span>, <span class="st">"World"</span>) &lt;&lt; endl; <span class="cm">// string concat</span>
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">3. Overloading with Default Arguments</h3>
+<pre><span class="kw">void</span> <span class="nm">display</span>(<span class="kw">string</span> name, <span class="kw">int</span> age = <span class="nm">18</span>, <span class="kw">string</span> city = <span class="st">"Chennai"</span>) {
+    cout &lt;&lt; name &lt;&lt; <span class="st">" | Age: "</span> &lt;&lt; age &lt;&lt; <span class="st">" | "</span> &lt;&lt; city &lt;&lt; endl;
+}
+<span class="cm">// Calls: display("Ram"); display("Sam",20); display("Raj",21,"Madurai");</span></pre>
+
+    <h3 class="section-title">4. Advantages</h3>
+    <ul class="point-list">
+      <li>Improves code <strong>readability</strong> — same logical name for similar operations.</li>
+      <li>Supports <strong>compile-time polymorphism</strong>.</li>
+      <li>Reduces need to invent different function names like <code>addInt</code>, <code>addDouble</code>.</li>
+      <li>Makes programs more <strong>intuitive and maintainable</strong>.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ UNIT 2 ═══════════════════════════════ -->
+<div class="unit-header" id="unit2">
+  <div class="unit-number">2</div>
+  <div>
+    <div class="unit-title">Classes and Objects</div>
+    <div class="unit-desc">Class &amp; Object · Static Members · Constructors · Arrays &amp; Pointers</div>
+  </div>
+</div>
+
+<!-- Q2.1 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 2.1</span>
+    <span class="q-text">Explain Class and Object in C++ with programs demonstrating encapsulation.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      A <em>Class</em> is a user-defined data type that acts as a blueprint for objects. It combines data (attributes) and functions (methods) into a single unit — implementing <strong>encapsulation</strong>. An <em>Object</em> is a runtime instance of a class.
+    </div>
+
+    <h3 class="section-title">1. Class Declaration Syntax</h3>
+<pre><span class="kw">class</span> <span class="tp">ClassName</span> {
+<span class="kw">private</span>:
+    <span class="cm">// data members (hidden from outside)</span>
+<span class="kw">public</span>:
+    <span class="cm">// member functions (interface)</span>
+<span class="kw">protected</span>:
+    <span class="cm">// accessible to derived classes</span>
+};</pre>
+
+    <h3 class="section-title">2. Access Specifiers</h3>
+    <table>
+      <tr><th>Specifier</th><th>Accessible From</th></tr>
+      <tr><td>private</td><td>Only within the same class</td></tr>
+      <tr><td>public</td><td>Anywhere in the program</td></tr>
+      <tr><td>protected</td><td>Same class + derived classes</td></tr>
+    </table>
+
+    <h3 class="section-title">3. Complete Program – Bank Account Class</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;string&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+
+<span class="kw">class</span> <span class="tp">BankAccount</span> {
+<span class="kw">private</span>:
+    <span class="kw">string</span> owner;
+    <span class="kw">double</span> balance;          <span class="cm">// encapsulated data</span>
+
+<span class="kw">public</span>:
+    <span class="cm">// Constructor</span>
+    <span class="nm">BankAccount</span>(<span class="kw">string</span> name, <span class="kw">double</span> bal) {
+        owner   = name;
+        balance = bal;
+    }
+
+    <span class="kw">void</span> <span class="nm">deposit</span>(<span class="kw">double</span> amt) {
+        <span class="kw">if</span>(amt &gt; <span class="nm">0</span>) balance += amt;
+        cout &lt;&lt; <span class="st">"Deposited: "</span> &lt;&lt; amt &lt;&lt; endl;
+    }
+
+    <span class="kw">void</span> <span class="nm">withdraw</span>(<span class="kw">double</span> amt) {
+        <span class="kw">if</span>(amt &lt;= balance) { balance -= amt; cout &lt;&lt; <span class="st">"Withdrawn: "</span> &lt;&lt; amt &lt;&lt; endl; }
+        <span class="kw">else</span> cout &lt;&lt; <span class="st">"Insufficient balance!"</span> &lt;&lt; endl;
+    }
+
+    <span class="kw">void</span> <span class="nm">display</span>() {
+        cout &lt;&lt; <span class="st">"Owner: "</span> &lt;&lt; owner &lt;&lt; <span class="st">" | Balance: Rs."</span> &lt;&lt; balance &lt;&lt; endl;
+    }
+};
+
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="tp">BankAccount</span> acc(<span class="st">"Karthik"</span>, <span class="nm">5000.0</span>);
+    acc.<span class="nm">display</span>();
+    acc.<span class="nm">deposit</span>(<span class="nm">2000</span>);
+    acc.<span class="nm">withdraw</span>(<span class="nm">1500</span>);
+    acc.<span class="nm">display</span>();
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">4. Key Concepts</h3>
+    <ul class="point-list">
+      <li><strong>Encapsulation:</strong> Data and methods are bundled; private data accessed only through public methods (getters/setters).</li>
+      <li><strong>Data Hiding:</strong> Internal state is protected from direct external modification.</li>
+      <li><strong>Member Functions:</strong> Can be defined inside the class (inline) or outside using the scope resolution operator (<code>::</code>).</li>
+      <li><strong>Object Creation:</strong> <code>ClassName obj;</code> (stack) or <code>ClassName *obj = new ClassName();</code> (heap).</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q2.2 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 2.2</span>
+    <span class="q-text">Explain Static Data Members and Static Member Functions in C++ with example.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      A <em>static data member</em> is shared among all objects of a class — only one copy exists in memory regardless of how many objects are created. A <em>static member function</em> can access only static data members.
+    </div>
+
+    <h3 class="section-title">1. Static Data Members</h3>
+    <ul class="point-list">
+      <li>Declared with <code>static</code> keyword inside the class.</li>
+      <li>Defined and initialized <strong>outside</strong> the class.</li>
+      <li>Shared by all objects — acts like a class-level variable.</li>
+      <li>Accessed as <code>ClassName::member</code> or via any object.</li>
+    </ul>
+
+    <h3 class="section-title">2. Static Member Functions</h3>
+    <ul class="point-list">
+      <li>Declared with <code>static</code> keyword.</li>
+      <li>Can be called without creating an object: <code>ClassName::func()</code>.</li>
+      <li>Can access only <strong>static</strong> data members; no <code>this</code> pointer.</li>
+      <li>Cannot access non-static members directly.</li>
+    </ul>
+
+    <h3 class="section-title">3. Complete Example – Student Counter</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+
+<span class="kw">class</span> <span class="tp">Student</span> {
+<span class="kw">private</span>:
+    <span class="kw">string</span> name;
+    <span class="kw">int</span> id;
+
+<span class="kw">public</span>:
+    <span class="kw">static int</span> count;    <span class="cm">// static data member</span>
+
+    <span class="nm">Student</span>(<span class="kw">string</span> n, <span class="kw">int</span> i) : name(n), id(i) {
+        count++;          <span class="cm">// incremented for each object</span>
+    }
+
+    <span class="kw">static void</span> <span class="nm">showCount</span>() {   <span class="cm">// static member function</span>
+        cout &lt;&lt; <span class="st">"Total students: "</span> &lt;&lt; count &lt;&lt; endl;
+    }
+
+    <span class="kw">void</span> <span class="nm">display</span>() {
+        cout &lt;&lt; <span class="st">"ID: "</span> &lt;&lt; id &lt;&lt; <span class="st">" Name: "</span> &lt;&lt; name &lt;&lt; endl;
+    }
+};
+
+<span class="cm">// Static member defined outside</span>
+<span class="kw">int</span> <span class="tp">Student</span>::count = <span class="nm">0</span>;
+
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="tp">Student</span>::<span class="nm">showCount</span>();   <span class="cm">// 0 – no object yet</span>
+
+    <span class="tp">Student</span> s1(<span class="st">"Arun"</span>, <span class="nm">1</span>);
+    <span class="tp">Student</span> s2(<span class="st">"Bala"</span>, <span class="nm">2</span>);
+    <span class="tp">Student</span> s3(<span class="st">"Chitra"</span>, <span class="nm">3</span>);
+
+    <span class="tp">Student</span>::<span class="nm">showCount</span>();   <span class="cm">// 3</span>
+    s1.<span class="nm">display</span>(); s2.<span class="nm">display</span>(); s3.<span class="nm">display</span>();
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">4. Output</h3>
+    <div class="diagram">Total students: 0<br>Total students: 3<br>ID: 1 Name: Arun<br>ID: 2 Name: Bala<br>ID: 3 Name: Chitra</div>
+
+    <h3 class="section-title">5. Difference: Static vs Non-Static</h3>
+    <table>
+      <tr><th>Feature</th><th>Static Member</th><th>Non-Static Member</th></tr>
+      <tr><td>Memory</td><td>One copy for all objects</td><td>One copy per object</td></tr>
+      <tr><td>Access</td><td>ClassName::member</td><td>object.member</td></tr>
+      <tr><td>this pointer</td><td>Not available</td><td>Available</td></tr>
+      <tr><td>Can access</td><td>Only static members</td><td>All members</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Q2.3 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 2.3</span>
+    <span class="q-text">Explain the Types of Constructors in C++ with programs.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      A <em>Constructor</em> is a special member function that is automatically invoked when an object is created. It has the same name as the class and <strong>no return type</strong>. It is used to initialize the object's data members.
+    </div>
+
+    <h3 class="section-title">1. Types of Constructors</h3>
+
+    <p><strong>a) Default Constructor</strong> — No parameters; compiler provides one if not defined.</p>
+<pre><span class="kw">class</span> <span class="tp">Box</span> {
+<span class="kw">public</span>:
+    <span class="kw">int</span> length, width;
+    <span class="nm">Box</span>() { length = width = <span class="nm">0</span>; cout &lt;&lt; <span class="st">"Default Constructor\n"</span>; }
+};</pre>
+
+    <p><strong>b) Parameterized Constructor</strong> — Accepts arguments to initialize members.</p>
+<pre><span class="kw">class</span> <span class="tp">Box</span> {
+<span class="kw">public</span>:
+    <span class="kw">int</span> l, w, h;
+    <span class="nm">Box</span>(<span class="kw">int</span> a, <span class="kw">int</span> b, <span class="kw">int</span> c) : l(a), w(b), h(c) {}
+    <span class="kw">int</span> <span class="nm">volume</span>() { <span class="kw">return</span> l * w * h; }
+};</pre>
+
+    <p><strong>c) Copy Constructor</strong> — Initializes an object from another object of the same class.</p>
+<pre><span class="kw">class</span> <span class="tp">Box</span> {
+<span class="kw">public</span>:
+    <span class="kw">int</span> l, w;
+    <span class="nm">Box</span>(<span class="kw">int</span> a, <span class="kw">int</span> b) { l=a; w=b; }
+    <span class="nm">Box</span>(<span class="kw">const</span> <span class="tp">Box</span> &amp;obj) {    <span class="cm">// Copy Constructor</span>
+        l = obj.l; w = obj.w;
+        cout &lt;&lt; <span class="st">"Copy Constructor invoked\n"</span>;
+    }
+};
+<span class="cm">// Usage: Box b1(10,5); Box b2(b1);  ← copy constructor called</span></pre>
+
+    <p><strong>d) Constructor Overloading</strong> — Multiple constructors with different parameters.</p>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+<span class="kw">class</span> <span class="tp">Rectangle</span> {
+    <span class="kw">int</span> l, w;
+<span class="kw">public</span>:
+    <span class="nm">Rectangle</span>()            { l = w = <span class="nm">0</span>; }
+    <span class="nm">Rectangle</span>(<span class="kw">int</span> s)        { l = w = s; }         <span class="cm">// square</span>
+    <span class="nm">Rectangle</span>(<span class="kw">int</span> a,<span class="kw">int</span> b) { l = a; w = b; }
+    <span class="kw">void</span> <span class="nm">area</span>() { cout &lt;&lt; <span class="st">"Area = "</span> &lt;&lt; l*w &lt;&lt; endl; }
+};
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="tp">Rectangle</span> r1;           r1.<span class="nm">area</span>();  <span class="cm">// 0</span>
+    <span class="tp">Rectangle</span> r2(<span class="nm">5</span>);        r2.<span class="nm">area</span>();  <span class="cm">// 25</span>
+    <span class="tp">Rectangle</span> r3(<span class="nm">4</span>,<span class="nm">7</span>);      r3.<span class="nm">area</span>();  <span class="cm">// 28</span>
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">2. Destructor</h3>
+    <ul class="point-list">
+      <li>Special function called when object goes out of scope or is deleted.</li>
+      <li>Syntax: <code>~ClassName() { }</code></li>
+      <li>Used to release dynamically allocated memory.</li>
+      <li>Only one destructor per class; cannot be overloaded.</li>
+    </ul>
+
+    <h3 class="section-title">3. Summary Table</h3>
+    <table>
+      <tr><th>Constructor Type</th><th>Parameters</th><th>When Called</th></tr>
+      <tr><td>Default</td><td>None</td><td>ClassName obj;</td></tr>
+      <tr><td>Parameterized</td><td>One or more</td><td>ClassName obj(args);</td></tr>
+      <tr><td>Copy</td><td>const ClassName&amp;</td><td>ClassName obj2(obj1);</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Q2.4 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 2.4</span>
+    <span class="q-text">Explain Object Arrays and Pointers in C++ with programs.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      An <em>array of objects</em> stores multiple objects of the same class in contiguous memory. A <em>pointer to an object</em> stores the address of an object and allows dynamic memory management.
+    </div>
+
+    <h3 class="section-title">1. Array of Objects</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+<span class="kw">class</span> <span class="tp">Student</span> {
+<span class="kw">public</span>:
+    <span class="kw">string</span> name; <span class="kw">int</span> marks;
+    <span class="kw">void</span> <span class="nm">input</span>() { cin &gt;&gt; name &gt;&gt; marks; }
+    <span class="kw">void</span> <span class="nm">display</span>() { cout &lt;&lt; name &lt;&lt; <span class="st">": "</span> &lt;&lt; marks &lt;&lt; endl; }
+};
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="tp">Student</span> s[<span class="nm">3</span>];          <span class="cm">// array of 3 Student objects</span>
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="nm">0</span>; i&lt;<span class="nm">3</span>; i++) s[i].<span class="nm">input</span>();
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="nm">0</span>; i&lt;<span class="nm">3</span>; i++) s[i].<span class="nm">display</span>();
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">2. Pointers to Objects</h3>
+<pre><span class="kw">class</span> <span class="tp">Point</span> {
+<span class="kw">public</span>:
+    <span class="kw">int</span> x, y;
+    <span class="nm">Point</span>(<span class="kw">int</span> a, <span class="kw">int</span> b): x(a), y(b){}
+    <span class="kw">void</span> <span class="nm">show</span>() { cout &lt;&lt; <span class="st">"("</span>&lt;&lt;x&lt;&lt;<span class="st">","</span>&lt;&lt;y&lt;&lt;<span class="st">")"</span>&lt;&lt;endl; }
+};
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="tp">Point</span> p1(<span class="nm">3</span>,<span class="nm">4</span>);
+    <span class="tp">Point</span> *ptr = &amp;p1;         <span class="cm">// pointer to object</span>
+    ptr-&gt;<span class="nm">show</span>();              <span class="cm">// access via arrow operator</span>
+
+    <span class="tp">Point</span> *dyn = <span class="kw">new</span> <span class="tp">Point</span>(<span class="nm">10</span>,<span class="nm">20</span>); <span class="cm">// dynamic allocation</span>
+    dyn-&gt;<span class="nm">show</span>();
+    <span class="kw">delete</span> dyn;               <span class="cm">// release memory</span>
+
+    <span class="cm">// Dynamic array of objects</span>
+    <span class="tp">Point</span> *arr = <span class="kw">new</span> <span class="tp">Point</span>[<span class="nm">2</span>]{{<span class="nm">1</span>,<span class="nm">2</span>},{<span class="nm">3</span>,<span class="nm">4</span>}};
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="nm">0</span>; i&lt;<span class="nm">2</span>; i++) (arr+i)-&gt;<span class="nm">show</span>();
+    <span class="kw">delete</span>[] arr;
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">3. this Pointer</h3>
+    <ul class="point-list">
+      <li><code>this</code> is an implicit pointer available in all non-static member functions.</li>
+      <li>It points to the object that invoked the member function.</li>
+      <li>Used to resolve naming conflicts and return the current object.</li>
+    </ul>
+<pre><span class="kw">class</span> <span class="tp">MyClass</span> {
+    <span class="kw">int</span> x;
+<span class="kw">public</span>:
+    <span class="nm">MyClass</span>(<span class="kw">int</span> x) { <span class="kw">this</span>-&gt;x = x; }  <span class="cm">// this->x = member, x = param</span>
+    <span class="tp">MyClass</span>&amp; <span class="nm">setX</span>(<span class="kw">int</span> v) { x = v; <span class="kw">return</span> *<span class="kw">this</span>; } <span class="cm">// method chaining</span>
+};</pre>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ UNIT 3 ═══════════════════════════════ -->
+<div class="unit-header" id="unit3">
+  <div class="unit-number">3</div>
+  <div>
+    <div class="unit-title">Inheritance and Polymorphism</div>
+    <div class="unit-desc">Types of Inheritance · Function Overriding · Abstract Class · Virtual Functions</div>
+  </div>
+</div>
+
+<!-- Q3.1 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 3.1</span>
+    <span class="q-text">Explain the Types of Inheritance in C++ with programs.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      <em>Inheritance</em> is the mechanism by which a class (derived/child) acquires properties and behaviors of another class (base/parent). It promotes <strong>code reusability</strong> and establishes an IS-A relationship.
+    </div>
+
+    <h3 class="section-title">1. Single Inheritance</h3>
+    <p>One derived class inherits from one base class.</p>
+<pre><span class="kw">class</span> <span class="tp">Animal</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="nm">breathe</span>() { cout &lt;&lt; <span class="st">"Breathing...\n"</span>; }
+};
+<span class="kw">class</span> <span class="tp">Dog</span> : <span class="kw">public</span> <span class="tp">Animal</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="nm">bark</span>() { cout &lt;&lt; <span class="st">"Barking...\n"</span>; }
+};
+<span class="cm">// Dog d; d.breathe(); d.bark();</span></pre>
+
+    <h3 class="section-title">2. Multiple Inheritance</h3>
+    <p>One derived class inherits from multiple base classes.</p>
+<pre><span class="kw">class</span> <span class="tp">Father</span> { <span class="kw">public</span>: <span class="kw">void</span> <span class="nm">property</span>() { cout &lt;&lt; <span class="st">"Father's property\n"</span>; }};
+<span class="kw">class</span> <span class="tp">Mother</span> { <span class="kw">public</span>: <span class="kw">void</span> <span class="nm">talent</span>()   { cout &lt;&lt; <span class="st">"Mother's talent\n"</span>;   }};
+<span class="kw">class</span> <span class="tp">Child</span> : <span class="kw">public</span> <span class="tp">Father</span>, <span class="kw">public</span> <span class="tp">Mother</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="nm">show</span>() { <span class="nm">property</span>(); <span class="nm">talent</span>(); }
+};</pre>
+
+    <h3 class="section-title">3. Multilevel Inheritance</h3>
+    <p>Inheritance in a chain: A → B → C.</p>
+<pre><span class="kw">class</span> <span class="tp">Vehicle</span>  { <span class="kw">public</span>: <span class="kw">void</span> <span class="nm">move</span>()  { cout &lt;&lt; <span class="st">"Moving\n"</span>;     }};
+<span class="kw">class</span> <span class="tp">Car</span>     : <span class="kw">public</span> <span class="tp">Vehicle</span> {
+<span class="kw">public</span>: <span class="kw">void</span> <span class="nm">drive</span>() { cout &lt;&lt; <span class="st">"Driving\n"</span>; }};
+<span class="kw">class</span> <span class="tp">SportsCar</span>: <span class="kw">public</span> <span class="tp">Car</span>     {
+<span class="kw">public</span>: <span class="kw">void</span> <span class="nm">turbo</span>() { cout &lt;&lt; <span class="st">"Turbo boost!\n"</span>; }};
+<span class="cm">// SportsCar sc; sc.move(); sc.drive(); sc.turbo();</span></pre>
+
+    <h3 class="section-title">4. Hierarchical Inheritance</h3>
+    <p>Multiple derived classes from one base class.</p>
+<pre><span class="kw">class</span> <span class="tp">Shape</span>  { <span class="kw">public</span>: <span class="kw">void</span> <span class="nm">draw</span>() { cout &lt;&lt; <span class="st">"Drawing shape\n"</span>;  }};
+<span class="kw">class</span> <span class="tp">Circle</span>: <span class="kw">public</span> <span class="tp">Shape</span> { <span class="kw">public</span>: <span class="kw">void</span> <span class="nm">area</span>() { cout &lt;&lt; <span class="st">"Circle area\n"</span>; }};
+<span class="kw">class</span> <span class="tp">Square</span>: <span class="kw">public</span> <span class="tp">Shape</span> { <span class="kw">public</span>: <span class="kw">void</span> <span class="nm">area</span>() { cout &lt;&lt; <span class="st">"Square area\n"</span>; }};</pre>
+
+    <h3 class="section-title">5. Hybrid Inheritance</h3>
+    <p>Combination of two or more types of inheritance. May lead to the <strong>Diamond Problem</strong> resolved using <strong>virtual base classes</strong>.</p>
+<pre><span class="kw">class</span> <span class="tp">A</span> { <span class="kw">public</span>: <span class="kw">int</span> x; };
+<span class="kw">class</span> <span class="tp">B</span> : <span class="kw">virtual public</span> <span class="tp">A</span> {};     <span class="cm">// virtual to avoid duplicate</span>
+<span class="kw">class</span> <span class="tp">C</span> : <span class="kw">virtual public</span> <span class="tp">A</span> {};
+<span class="kw">class</span> <span class="tp">D</span> : <span class="kw">public</span> <span class="tp">B</span>, <span class="kw">public</span> <span class="tp">C</span> {};   <span class="cm">// D gets only one copy of A</span></pre>
+
+    <h3 class="section-title">6. Inheritance Modes</h3>
+    <table>
+      <tr><th>Base</th><th>public inheritance</th><th>protected inheritance</th><th>private inheritance</th></tr>
+      <tr><td>public</td><td>public</td><td>protected</td><td>private</td></tr>
+      <tr><td>protected</td><td>protected</td><td>protected</td><td>private</td></tr>
+      <tr><td>private</td><td>Not inherited</td><td>Not inherited</td><td>Not inherited</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Q3.2 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 3.2</span>
+    <span class="q-text">Explain Function Overriding in C++ with a complete program.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      <em>Function Overriding</em> occurs when a derived class defines a function with the <strong>same name, same parameters, and same return type</strong> as a function in the base class. The derived class version replaces the base class version — enabling <strong>run-time polymorphism</strong>.
+    </div>
+
+    <h3 class="section-title">1. Key Characteristics</h3>
+    <ul class="point-list">
+      <li>Requires <strong>inheritance</strong> — works only in derived classes.</li>
+      <li>Function signature must be <strong>identical</strong> (name + parameters + return type).</li>
+      <li>When called via base class pointer/reference with <code>virtual</code>, the derived version executes.</li>
+      <li>Without <code>virtual</code>, the base class version is called (static binding).</li>
+    </ul>
+
+    <h3 class="section-title">2. Complete Program</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+
+<span class="kw">class</span> <span class="tp">Shape</span> {
+<span class="kw">public</span>:
+    <span class="kw">virtual void</span> <span class="nm">draw</span>() {           <span class="cm">// virtual enables overriding</span>
+        cout &lt;&lt; <span class="st">"Drawing a generic shape\n"</span>;
+    }
+    <span class="kw">virtual double</span> <span class="nm">area</span>() { <span class="kw">return</span> <span class="nm">0</span>; }
+};
+
+<span class="kw">class</span> <span class="tp">Circle</span> : <span class="kw">public</span> <span class="tp">Shape</span> {
+    <span class="kw">double</span> radius;
+<span class="kw">public</span>:
+    <span class="nm">Circle</span>(<span class="kw">double</span> r) : radius(r) {}
+    <span class="kw">void</span> <span class="nm">draw</span>() <span class="kw">override</span> {          <span class="cm">// overrides base version</span>
+        cout &lt;&lt; <span class="st">"Drawing Circle with radius "</span> &lt;&lt; radius &lt;&lt; endl;
+    }
+    <span class="kw">double</span> <span class="nm">area</span>() <span class="kw">override</span> { <span class="kw">return</span> <span class="nm">3.14</span> * radius * radius; }
+};
+
+<span class="kw">class</span> <span class="tp">Rectangle</span> : <span class="kw">public</span> <span class="tp">Shape</span> {
+    <span class="kw">double</span> l, w;
+<span class="kw">public</span>:
+    <span class="nm">Rectangle</span>(<span class="kw">double</span> a,<span class="kw">double</span> b): l(a), w(b){}
+    <span class="kw">void</span> <span class="nm">draw</span>() <span class="kw">override</span> {
+        cout &lt;&lt; <span class="st">"Drawing Rectangle "</span> &lt;&lt; l &lt;&lt; <span class="st">"x"</span> &lt;&lt; w &lt;&lt; endl;
+    }
+    <span class="kw">double</span> <span class="nm">area</span>() <span class="kw">override</span> { <span class="kw">return</span> l * w; }
+};
+
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="tp">Shape</span> *s;                        <span class="cm">// base class pointer</span>
+
+    <span class="tp">Circle</span> c(<span class="nm">5.0</span>);
+    s = &amp;c;
+    s-&gt;<span class="nm">draw</span>();                       <span class="cm">// Circle's draw called (runtime)</span>
+    cout &lt;&lt; <span class="st">"Area: "</span> &lt;&lt; s-&gt;<span class="nm">area</span>() &lt;&lt; endl;
+
+    <span class="tp">Rectangle</span> r(<span class="nm">4.0</span>, <span class="nm">6.0</span>);
+    s = &amp;r;
+    s-&gt;<span class="nm">draw</span>();
+    cout &lt;&lt; <span class="st">"Area: "</span> &lt;&lt; s-&gt;<span class="nm">area</span>() &lt;&lt; endl;
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">3. Overloading vs Overriding</h3>
+    <table>
+      <tr><th>Feature</th><th>Overloading</th><th>Overriding</th></tr>
+      <tr><td>Class</td><td>Same class</td><td>Different classes (inheritance)</td></tr>
+      <tr><td>Parameters</td><td>Must differ</td><td>Must be same</td></tr>
+      <tr><td>Binding</td><td>Compile-time</td><td>Run-time (with virtual)</td></tr>
+      <tr><td>Keyword</td><td>—</td><td>virtual / override</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- Q3.3 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 3.3</span>
+    <span class="q-text">Explain Abstract Class in C++ with example programs.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      An <em>Abstract Class</em> is a class that contains at least one <strong>pure virtual function</strong>. It cannot be instantiated (no objects can be created directly). It serves as a <strong>base class interface</strong> that derived classes must implement.
+    </div>
+
+    <h3 class="section-title">1. Pure Virtual Function</h3>
+    <ul class="point-list">
+      <li>Declared with <code>= 0</code> at the end: <code>virtual void func() = 0;</code></li>
+      <li>Has no body in the abstract class.</li>
+      <li>All derived (concrete) classes <strong>must override</strong> it.</li>
+    </ul>
+
+    <h3 class="section-title">2. Complete Example</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+
+<span class="kw">class</span> <span class="tp">Employee</span> {           <span class="cm">// Abstract Class</span>
+<span class="kw">protected</span>:
+    <span class="kw">string</span> name;
+    <span class="kw">int</span> id;
+<span class="kw">public</span>:
+    <span class="nm">Employee</span>(<span class="kw">string</span> n, <span class="kw">int</span> i): name(n), id(i) {}
+    <span class="kw">virtual double</span> <span class="nm">calculateSalary</span>() = <span class="nm">0</span>;  <span class="cm">// Pure virtual</span>
+    <span class="kw">virtual void</span> <span class="nm">display</span>() {
+        cout &lt;&lt; <span class="st">"ID: "</span>&lt;&lt;id&lt;&lt;<span class="st">" Name: "</span>&lt;&lt;name;
+    }
+    <span class="kw">virtual</span> ~<span class="nm">Employee</span>() {}
+};
+
+<span class="kw">class</span> <span class="tp">FullTime</span> : <span class="kw">public</span> <span class="tp">Employee</span> {
+    <span class="kw">double</span> monthlySalary;
+<span class="kw">public</span>:
+    <span class="nm">FullTime</span>(<span class="kw">string</span> n, <span class="kw">int</span> i, <span class="kw">double</span> s)
+        : <span class="nm">Employee</span>(n,i), monthlySalary(s) {}
+    <span class="kw">double</span> <span class="nm">calculateSalary</span>() <span class="kw">override</span> { <span class="kw">return</span> monthlySalary; }
+    <span class="kw">void</span> <span class="nm">display</span>() <span class="kw">override</span> {
+        <span class="tp">Employee</span>::<span class="nm">display</span>();
+        cout &lt;&lt; <span class="st">" [FullTime] Salary: Rs."</span> &lt;&lt; <span class="nm">calculateSalary</span>() &lt;&lt; endl;
+    }
+};
+
+<span class="kw">class</span> <span class="tp">PartTime</span> : <span class="kw">public</span> <span class="tp">Employee</span> {
+    <span class="kw">int</span> hours; <span class="kw">double</span> rate;
+<span class="kw">public</span>:
+    <span class="nm">PartTime</span>(<span class="kw">string</span> n, <span class="kw">int</span> i, <span class="kw">int</span> h, <span class="kw">double</span> r)
+        : <span class="nm">Employee</span>(n,i), hours(h), rate(r){}
+    <span class="kw">double</span> <span class="nm">calculateSalary</span>() <span class="kw">override</span> { <span class="kw">return</span> hours * rate; }
+    <span class="kw">void</span> <span class="nm">display</span>() <span class="kw">override</span> {
+        <span class="tp">Employee</span>::<span class="nm">display</span>();
+        cout &lt;&lt; <span class="st">" [PartTime] Salary: Rs."</span> &lt;&lt; <span class="nm">calculateSalary</span>() &lt;&lt; endl;
+    }
+};
+
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="tp">Employee</span> *e[<span class="nm">2</span>];
+    e[<span class="nm">0</span>] = <span class="kw">new</span> <span class="tp">FullTime</span>(<span class="st">"Meena"</span>, <span class="nm">101</span>, <span class="nm">35000</span>);
+    e[<span class="nm">1</span>] = <span class="kw">new</span> <span class="tp">PartTime</span>(<span class="st">"Kumar"</span>, <span class="nm">102</span>, <span class="nm">80</span>, <span class="nm">150</span>);
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="nm">0</span>; i&lt;<span class="nm">2</span>; i++) e[i]-&gt;<span class="nm">display</span>();
+    <span class="kw">delete</span> e[<span class="nm">0</span>]; <span class="kw">delete</span> e[<span class="nm">1</span>];
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">3. Rules and Key Points</h3>
+    <ul class="point-list">
+      <li>Objects of abstract class <strong>cannot be created</strong>.</li>
+      <li>Pointers and references to abstract class <strong>can be created</strong>.</li>
+      <li>If a derived class does not override all pure virtual functions, it also becomes abstract.</li>
+      <li>Abstract classes define a <strong>common interface</strong> for all subclasses.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q3.4 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 3.4</span>
+    <span class="q-text">Explain Virtual Functions and Runtime Polymorphism in C++.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      A <em>Virtual Function</em> is a member function declared in the base class with the <code>virtual</code> keyword. When called through a base class pointer/reference, the <strong>correct derived class version is called at runtime</strong> — this is <em>Runtime Polymorphism (Dynamic Dispatch)</em>.
+    </div>
+
+    <h3 class="section-title">1. How Virtual Functions Work – vTable</h3>
+    <ul class="point-list">
+      <li>Compiler creates a <strong>virtual function table (vTable)</strong> for each class with virtual functions.</li>
+      <li>Each object contains a <strong>vPtr</strong> (pointer to its class's vTable).</li>
+      <li>At runtime, the correct function is found by looking up the vTable — hence <em>dynamic binding</em>.</li>
+    </ul>
+
+    <div class="diagram">vTable for Circle:  [ draw → Circle::draw,  area → Circle::area  ]<br>vTable for Square:  [ draw → Square::draw,  area → Square::area  ]</div>
+
+    <h3 class="section-title">2. Complete Program</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+
+<span class="kw">class</span> <span class="tp">Animal</span> {
+<span class="kw">public</span>:
+    <span class="kw">virtual void</span> <span class="nm">speak</span>() {       <span class="cm">// virtual function</span>
+        cout &lt;&lt; <span class="st">"Animal speaks\n"</span>;
+    }
+    <span class="kw">virtual</span> ~<span class="nm">Animal</span>() {}          <span class="cm">// virtual destructor (best practice)</span>
+};
+
+<span class="kw">class</span> <span class="tp">Dog</span> : <span class="kw">public</span> <span class="tp">Animal</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="nm">speak</span>() <span class="kw">override</span> { cout &lt;&lt; <span class="st">"Dog: Woof!\n"</span>;  }
+};
+<span class="kw">class</span> <span class="tp">Cat</span> : <span class="kw">public</span> <span class="tp">Animal</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="nm">speak</span>() <span class="kw">override</span> { cout &lt;&lt; <span class="st">"Cat: Meow!\n"</span>; }
+};
+<span class="kw">class</span> <span class="tp">Cow</span> : <span class="kw">public</span> <span class="tp">Animal</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="nm">speak</span>() <span class="kw">override</span> { cout &lt;&lt; <span class="st">"Cow: Moo!\n"</span>;  }
+};
+
+<span class="kw">void</span> <span class="nm">makeNoise</span>(<span class="tp">Animal</span> *a) {    <span class="cm">// polymorphic function</span>
+    a-&gt;<span class="nm">speak</span>();                   <span class="cm">// resolved at runtime</span>
+}
+
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="tp">Animal</span> *animals[<span class="nm">3</span>] = { <span class="kw">new</span> <span class="tp">Dog</span>(), <span class="kw">new</span> <span class="tp">Cat</span>(), <span class="kw">new</span> <span class="tp">Cow</span>() };
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="nm">0</span>; i&lt;<span class="nm">3</span>; i++) {
+        <span class="nm">makeNoise</span>(animals[i]);
+        <span class="kw">delete</span> animals[i];
+    }
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">3. Virtual Destructor</h3>
+    <ul class="point-list">
+      <li>When deleting a derived object through a base pointer, without <code>virtual</code> destructor only the base destructor is called → <strong>memory leak</strong>.</li>
+      <li>Always declare destructor <code>virtual</code> in base classes with virtual functions.</li>
+    </ul>
+
+    <h3 class="section-title">4. Compile-time vs Runtime Polymorphism</h3>
+    <table>
+      <tr><th>Feature</th><th>Compile-time</th><th>Runtime</th></tr>
+      <tr><td>Mechanism</td><td>Function / Operator Overloading</td><td>Virtual Functions</td></tr>
+      <tr><td>Binding</td><td>Static (early)</td><td>Dynamic (late)</td></tr>
+      <tr><td>Performance</td><td>Faster</td><td>Slight overhead (vTable)</td></tr>
+      <tr><td>Flexibility</td><td>Limited</td><td>High</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ UNIT 4 ═══════════════════════════════ -->
+<div class="unit-header" id="unit4">
+  <div class="unit-number">4</div>
+  <div>
+    <div class="unit-title">Operator Overloading, Templates &amp; Exception Handling</div>
+    <div class="unit-desc">Binary Operator Overloading · Function Templates · Exception Handling · Multiple Catch</div>
+  </div>
+</div>
+
+<!-- Q4.1 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 4.1</span>
+    <span class="q-text">Explain Operator Overloading (Binary Operator) in C++ with complete programs.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      <em>Operator Overloading</em> allows C++ operators to be redefined to work with user-defined data types (classes). This enables operators like +, –, *, ==, &lt;&lt; to work on objects — a form of <strong>compile-time polymorphism</strong>.
+    </div>
+
+    <h3 class="section-title">1. Syntax</h3>
+<pre><span class="kw">return_type operator</span> <span class="nm">symbol</span> (parameters) {
+    <span class="cm">// operator logic</span>
+}</pre>
+
+    <h3 class="section-title">2. Binary Operator Overloading – (+) for Complex Numbers</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+
+<span class="kw">class</span> <span class="tp">Complex</span> {
+<span class="kw">private</span>:
+    <span class="kw">double</span> real, imag;
+<span class="kw">public</span>:
+    <span class="nm">Complex</span>(<span class="kw">double</span> r = <span class="nm">0</span>, <span class="kw">double</span> i = <span class="nm">0</span>) : real(r), imag(i) {}
+
+    <span class="cm">// Overload + operator</span>
+    <span class="tp">Complex</span> <span class="kw">operator</span>+(<span class="kw">const</span> <span class="tp">Complex</span> &amp;c) {
+        <span class="kw">return</span> <span class="tp">Complex</span>(real + c.real, imag + c.imag);
+    }
+
+    <span class="cm">// Overload – operator</span>
+    <span class="tp">Complex</span> <span class="kw">operator</span>-(<span class="kw">const</span> <span class="tp">Complex</span> &amp;c) {
+        <span class="kw">return</span> <span class="tp">Complex</span>(real - c.real, imag - c.imag);
+    }
+
+    <span class="cm">// Overload * operator</span>
+    <span class="tp">Complex</span> <span class="kw">operator</span>*(<span class="kw">const</span> <span class="tp">Complex</span> &amp;c) {
+        <span class="kw">return</span> <span class="tp">Complex</span>(real*c.real - imag*c.imag,
+                        real*c.imag + imag*c.real);
+    }
+
+    <span class="cm">// Overload == operator</span>
+    <span class="kw">bool</span> <span class="kw">operator</span>==(<span class="kw">const</span> <span class="tp">Complex</span> &amp;c) {
+        <span class="kw">return</span> (real == c.real &amp;&amp; imag == c.imag);
+    }
+
+    <span class="cm">// Overload &lt;&lt; (friend function)</span>
+    <span class="kw">friend</span> ostream&amp; <span class="kw">operator</span>&lt;&lt;(ostream &amp;out, <span class="kw">const</span> <span class="tp">Complex</span> &amp;c) {
+        out &lt;&lt; c.real;
+        <span class="kw">if</span>(c.imag &gt;= <span class="nm">0</span>) out &lt;&lt; <span class="st">"+"</span>;
+        out &lt;&lt; c.imag &lt;&lt; <span class="st">"i"</span>;
+        <span class="kw">return</span> out;
+    }
+};
+
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="tp">Complex</span> c1(<span class="nm">3</span>, <span class="nm">4</span>), c2(<span class="nm">1</span>, -<span class="nm">2</span>);
+    cout &lt;&lt; <span class="st">"c1 = "</span>     &lt;&lt; c1 &lt;&lt; endl;
+    cout &lt;&lt; <span class="st">"c2 = "</span>     &lt;&lt; c2 &lt;&lt; endl;
+    cout &lt;&lt; <span class="st">"c1+c2 = "</span>  &lt;&lt; c1 + c2 &lt;&lt; endl;
+    cout &lt;&lt; <span class="st">"c1-c2 = "</span>  &lt;&lt; c1 - c2 &lt;&lt; endl;
+    cout &lt;&lt; <span class="st">"c1*c2 = "</span>  &lt;&lt; c1 * c2 &lt;&lt; endl;
+    cout &lt;&lt; <span class="st">"Equal? "</span>   &lt;&lt; (c1 == c2 ? <span class="st">"Yes"</span> : <span class="st">"No"</span>) &lt;&lt; endl;
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">3. Operators That Cannot Be Overloaded</h3>
+    <ul class="point-list">
+      <li><code>::</code> — Scope resolution</li>
+      <li><code>.</code> — Member access</li>
+      <li><code>.*</code> — Pointer-to-member</li>
+      <li><code>?:</code> — Ternary operator</li>
+      <li><code>sizeof</code>, <code>typeid</code></li>
+    </ul>
+
+    <h3 class="section-title">4. Rules for Operator Overloading</h3>
+    <ul class="point-list">
+      <li>At least one operand must be a <strong>user-defined type</strong>.</li>
+      <li>Overloading cannot change operator <strong>precedence</strong> or <strong>associativity</strong>.</li>
+      <li>Overloading cannot change the <strong>number of operands</strong>.</li>
+      <li>Use <strong>friend functions</strong> when the left operand is not a class object (e.g., cout &lt;&lt;).</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q4.2 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 4.2</span>
+    <span class="q-text">Explain Function Templates in C++ with programs.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      A <em>Function Template</em> is a blueprint for creating generic functions that can work with any data type. The actual data type is determined at compile time when the function is called — this is <strong>generic programming</strong>.
+    </div>
+
+    <h3 class="section-title">1. Syntax</h3>
+<pre><span class="kw">template</span> &lt;<span class="kw">typename</span> T&gt;
+T <span class="nm">functionName</span>(T param1, T param2) {
+    <span class="cm">// function body</span>
+}</pre>
+
+    <h3 class="section-title">2. Complete Example – Generic Functions</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+
+<span class="cm">// Template function – maximum</span>
+<span class="kw">template</span> &lt;<span class="kw">typename</span> T&gt;
+T <span class="nm">getMax</span>(T a, T b) {
+    <span class="kw">return</span> (a &gt; b) ? a : b;
+}
+
+<span class="cm">// Template with two type parameters</span>
+<span class="kw">template</span> &lt;<span class="kw">typename</span> T1, <span class="kw">typename</span> T2&gt;
+<span class="kw">void</span> <span class="nm">printPair</span>(T1 x, T2 y) {
+    cout &lt;&lt; <span class="st">"("</span> &lt;&lt; x &lt;&lt; <span class="st">", "</span> &lt;&lt; y &lt;&lt; <span class="st">")\n"</span>;
+}
+
+<span class="cm">// Template – swap values</span>
+<span class="kw">template</span> &lt;<span class="kw">typename</span> T&gt;
+<span class="kw">void</span> <span class="nm">swapValues</span>(T &amp;a, T &amp;b) {
+    T temp = a; a = b; b = temp;
+}
+
+<span class="cm">// Template – bubble sort</span>
+<span class="kw">template</span> &lt;<span class="kw">typename</span> T&gt;
+<span class="kw">void</span> <span class="nm">bubbleSort</span>(T arr[], <span class="kw">int</span> n) {
+    <span class="kw">for</span>(<span class="kw">int</span> i=<span class="nm">0</span>; i&lt;n-<span class="nm">1</span>; i++)
+        <span class="kw">for</span>(<span class="kw">int</span> j=<span class="nm">0</span>; j&lt;n-i-<span class="nm">1</span>; j++)
+            <span class="kw">if</span>(arr[j] &gt; arr[j+<span class="nm">1</span>])
+                <span class="nm">swapValues</span>(arr[j], arr[j+<span class="nm">1</span>]);
+}
+
+<span class="kw">int</span> <span class="nm">main</span>() {
+    cout &lt;&lt; <span class="nm">getMax</span>(<span class="nm">10</span>, <span class="nm">20</span>)       &lt;&lt; endl; <span class="cm">// int → 20</span>
+    cout &lt;&lt; <span class="nm">getMax</span>(<span class="nm">3.14</span>, <span class="nm">2.72</span>)   &lt;&lt; endl; <span class="cm">// double → 3.14</span>
+    cout &lt;&lt; <span class="nm">getMax</span>(<span class="st">'z'</span>, <span class="st">'a'</span>)      &lt;&lt; endl; <span class="cm">// char → z</span>
+
+    <span class="nm">printPair</span>(<span class="nm">42</span>, <span class="st">"hello"</span>);
+
+    <span class="kw">int</span> arr[] = {<span class="nm">5</span>,<span class="nm">2</span>,<span class="nm">8</span>,<span class="nm">1</span>,<span class="nm">9</span>};
+    <span class="nm">bubbleSort</span>(arr, <span class="nm">5</span>);
+    <span class="kw">for</span>(<span class="kw">int</span> x : arr) cout &lt;&lt; x &lt;&lt; <span class="st">" "</span>;
+    cout &lt;&lt; endl;
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">3. Class Template (Brief)</h3>
+<pre><span class="kw">template</span> &lt;<span class="kw">typename</span> T&gt;
+<span class="kw">class</span> <span class="tp">Stack</span> {
+    T data[<span class="nm">100</span>]; <span class="kw">int</span> top = -<span class="nm">1</span>;
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="nm">push</span>(T val) { data[++top] = val; }
+    T <span class="nm">pop</span>()          { <span class="kw">return</span> data[top--]; }
+    T <span class="nm">peek</span>()         { <span class="kw">return</span> data[top]; }
+};
+<span class="cm">// Stack&lt;int&gt; si;  Stack&lt;string&gt; ss;  Stack&lt;double&gt; sd;</span></pre>
+
+    <h3 class="section-title">4. Advantages of Templates</h3>
+    <ul class="point-list">
+      <li><strong>Code reuse:</strong> One function works for all types.</li>
+      <li><strong>Type safety:</strong> Type checking at compile time.</li>
+      <li><strong>Performance:</strong> No runtime overhead; compiler generates type-specific code.</li>
+      <li>Foundation of the C++ <strong>Standard Template Library (STL)</strong>.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q4.3 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 4.3</span>
+    <span class="q-text">Explain Exception Handling in C++ with try, catch, and throw.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      <em>Exception Handling</em> is a mechanism to handle runtime errors gracefully, preventing abrupt program termination. C++ uses three keywords: <strong>try</strong> (monitor code), <strong>throw</strong> (raise exception), and <strong>catch</strong> (handle exception).
+    </div>
+
+    <h3 class="section-title">1. Syntax</h3>
+<pre><span class="kw">try</span> {
+    <span class="cm">// Code that may throw an exception</span>
+    <span class="kw">throw</span> exception_value;
+}
+<span class="kw">catch</span> (ExceptionType e) {
+    <span class="cm">// Handle the exception</span>
+}
+<span class="kw">catch</span> (...) {          <span class="cm">// Catch-all handler</span>
+    <span class="cm">// Handle any exception</span>
+}</pre>
+
+    <h3 class="section-title">2. Complete Program – Basic Exception Handling</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;stdexcept&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+
+<span class="kw">double</span> <span class="nm">divide</span>(<span class="kw">double</span> a, <span class="kw">double</span> b) {
+    <span class="kw">if</span>(b == <span class="nm">0</span>)
+        <span class="kw">throw</span> runtime_error(<span class="st">"Division by zero!"</span>);
+    <span class="kw">return</span> a / b;
+}
+
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="kw">try</span> {
+        cout &lt;&lt; <span class="nm">divide</span>(<span class="nm">10</span>, <span class="nm">2</span>) &lt;&lt; endl;  <span class="cm">// OK → 5</span>
+        cout &lt;&lt; <span class="nm">divide</span>(<span class="nm">10</span>, <span class="nm">0</span>) &lt;&lt; endl;  <span class="cm">// throws!</span>
+    }
+    <span class="kw">catch</span> (<span class="kw">const</span> runtime_error &amp;e) {
+        cout &lt;&lt; <span class="st">"Error: "</span> &lt;&lt; e.<span class="nm">what</span>() &lt;&lt; endl;
+    }
+    cout &lt;&lt; <span class="st">"Program continues after exception\n"</span>;
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">3. Standard Exception Classes</h3>
+    <table>
+      <tr><th>Class</th><th>Header</th><th>Use</th></tr>
+      <tr><td>exception</td><td>&lt;exception&gt;</td><td>Base class</td></tr>
+      <tr><td>runtime_error</td><td>&lt;stdexcept&gt;</td><td>Runtime errors</td></tr>
+      <tr><td>logic_error</td><td>&lt;stdexcept&gt;</td><td>Logic errors</td></tr>
+      <tr><td>out_of_range</td><td>&lt;stdexcept&gt;</td><td>Index out of bounds</td></tr>
+      <tr><td>bad_alloc</td><td>&lt;new&gt;</td><td>Memory allocation failure</td></tr>
+    </table>
+
+    <h3 class="section-title">4. Exception Flow</h3>
+    <div class="diagram">try block → throw exception<br>       ↓<br>Stack unwinding (destructors called)<br>       ↓<br>Matching catch block executes<br>       ↓<br>Program continues after try-catch</div>
+  </div>
+</div>
+
+<!-- Q4.4 -->
+<div class="q-card">
+  <div class="q-head">
+    <span class="q-num">Q 4.4</span>
+    <span class="q-text">Explain Multiple Catch Blocks and Custom Exception Classes in C++.</span>
+    <span class="marks-tag">13 Marks</span>
+  </div>
+  <div class="q-body">
+    <div class="definition-box">
+      <em>Multiple catch blocks</em> allow handling different types of exceptions separately. A <em>custom exception class</em> is a user-defined class derived from <code>std::exception</code> to represent application-specific errors.
+    </div>
+
+    <h3 class="section-title">1. Multiple Catch Blocks</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;stdexcept&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+
+<span class="kw">void</span> <span class="nm">process</span>(<span class="kw">int</span> type) {
+    <span class="kw">switch</span>(type) {
+        <span class="kw">case</span> <span class="nm">1</span>: <span class="kw">throw</span> <span class="nm">10</span>;                              <span class="cm">// int</span>
+        <span class="kw">case</span> <span class="nm">2</span>: <span class="kw">throw</span> <span class="nm">3.14</span>;                            <span class="cm">// double</span>
+        <span class="kw">case</span> <span class="nm">3</span>: <span class="kw">throw</span> <span class="kw">string</span>(<span class="st">"String error"</span>);          <span class="cm">// string</span>
+        <span class="kw">case</span> <span class="nm">4</span>: <span class="kw">throw</span> out_of_range(<span class="st">"Index exceeded"</span>);  <span class="cm">// STL</span>
+    }
+}
+
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="kw">for</span>(<span class="kw">int</span> t = <span class="nm">1</span>; t &lt;= <span class="nm">5</span>; t++) {
+        <span class="kw">try</span> {
+            <span class="nm">process</span>(t);
+        }
+        <span class="kw">catch</span> (<span class="kw">int</span> e)            { cout &lt;&lt; <span class="st">"Int exception: "</span>    &lt;&lt; e &lt;&lt; endl; }
+        <span class="kw">catch</span> (<span class="kw">double</span> e)         { cout &lt;&lt; <span class="st">"Double exception: "</span>  &lt;&lt; e &lt;&lt; endl; }
+        <span class="kw">catch</span> (<span class="kw">string</span> e)         { cout &lt;&lt; <span class="st">"String exception: "</span>  &lt;&lt; e &lt;&lt; endl; }
+        <span class="kw">catch</span> (out_of_range &amp;e)  { cout &lt;&lt; <span class="st">"Range exception: "</span>   &lt;&lt; e.<span class="nm">what</span>() &lt;&lt; endl; }
+        <span class="kw">catch</span> (...)              { cout &lt;&lt; <span class="st">"Unknown exception!\n"</span>; }
+    }
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">2. Custom Exception Class</h3>
+<pre><span class="kw">#include</span> <span class="st">&lt;iostream&gt;</span>
+<span class="kw">#include</span> <span class="st">&lt;exception&gt;</span>
+<span class="kw">using namespace</span> <span class="tp">std</span>;
+
+<span class="kw">class</span> <span class="tp">InsufficientFundsException</span> : <span class="kw">public</span> <span class="tp">exception</span> {
+    <span class="kw">double</span> amount;
+<span class="kw">public</span>:
+    <span class="nm">InsufficientFundsException</span>(<span class="kw">double</span> a) : amount(a) {}
+    <span class="kw">const char</span>* <span class="nm">what</span>() <span class="kw">const noexcept override</span> {
+        <span class="kw">return</span> <span class="st">"Insufficient funds in account!"</span>;
+    }
+    <span class="kw">double</span> <span class="nm">getAmount</span>() { <span class="kw">return</span> amount; }
+};
+
+<span class="kw">void</span> <span class="nm">withdraw</span>(<span class="kw">double</span> balance, <span class="kw">double</span> amount) {
+    <span class="kw">if</span>(amount &gt; balance)
+        <span class="kw">throw</span> <span class="tp">InsufficientFundsException</span>(amount - balance);
+    cout &lt;&lt; <span class="st">"Withdrawal successful: Rs."</span> &lt;&lt; amount &lt;&lt; endl;
+}
+
+<span class="kw">int</span> <span class="nm">main</span>() {
+    <span class="kw">try</span> {
+        <span class="nm">withdraw</span>(<span class="nm">5000</span>, <span class="nm">3000</span>);   <span class="cm">// OK</span>
+        <span class="nm">withdraw</span>(<span class="nm">5000</span>, <span class="nm">7000</span>);   <span class="cm">// throws</span>
+    }
+    <span class="kw">catch</span> (<span class="tp">InsufficientFundsException</span> &amp;e) {
+        cout &lt;&lt; <span class="st">"Exception: "</span> &lt;&lt; e.<span class="nm">what</span>() &lt;&lt; endl;
+        cout &lt;&lt; <span class="st">"Shortfall: Rs."</span> &lt;&lt; e.<span class="nm">getAmount</span>() &lt;&lt; endl;
+    }
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+
+    <h3 class="section-title">3. Re-throwing Exceptions</h3>
+<pre><span class="kw">catch</span>(<span class="kw">int</span> e) {
+    cout &lt;&lt; <span class="st">"Caught in inner: "</span> &lt;&lt; e &lt;&lt; endl;
+    <span class="kw">throw</span>;  <span class="cm">// re-throw to outer handler</span>
+}</pre>
+
+    <h3 class="section-title">4. Rules for Multiple Catch</h3>
+    <ul class="point-list">
+      <li>Catch blocks are evaluated <strong>top to bottom</strong> — more specific before general.</li>
+      <li><code>catch(...)</code> must always be the <strong>last</strong> catch block.</li>
+      <li>A base class catch <strong>can catch</strong> derived class exceptions.</li>
+      <li>Only <strong>one</strong> catch block executes per thrown exception.</li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>C++ Programming — 13 Mark Answers &nbsp;|&nbsp; Anna University &nbsp;|&nbsp; Units I – IV</p>
+  <p style="margin-top:.4rem;">Prepared for Examination Reference &nbsp;·&nbsp; All programs compiled and verified</p>
+</footer>
+
+</body>
+</html>
